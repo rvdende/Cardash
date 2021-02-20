@@ -1,26 +1,42 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { BARGuage } from './components/BARGuage';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  state = {
+    rpmNow: 200
+  }
+
+  componentDidMount = () => {
+    setInterval(() => {
+      this.setState({ rpmNow: this.state.rpmNow + (Math.random() - 0.5) * 10 + 2 })
+    }, 50)
+  }
+
+  render() {
+
+
+    var speed = 0;
+    var wheelRadius = 0.9;
+
+
+    var mykar
+    var maxRpm = 1000;
+    var rpmNow = 200;
+
+
+    return (
+      <div style={{
+        color: 'white',
+        backgroundColor: 'black', height: 800,
+        padding: 50
+      }}>
+        KAR DASHBOARD
+        <BARGuage label="RPM" min={0} max={maxRpm} value={this.state.rpmNow} />
+      </div>
+    );
+  }
 }
 
 export default App;
